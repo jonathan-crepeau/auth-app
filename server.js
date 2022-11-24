@@ -1,10 +1,17 @@
 const express = require('express');
+const logger = require('./middleware/utils');
 const app = express();
 const PORT = process.env.PORT || 3003;
 
+
+// SECTION - Middleware
+
+// Customer Logger Middleware
+app.use(logger);
+
 // SECTION - Routes
 
-// NOTE - Root (Home) Template
+// Root (Home) Template
 app.get('/', (req, res) => {
     res.send(`<h1>Root Route</h1>`);
 });
