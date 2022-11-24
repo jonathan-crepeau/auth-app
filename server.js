@@ -3,6 +3,8 @@ const logger = require('./middleware/utils');
 const app = express();
 const PORT = process.env.PORT || 3003;
 
+const db = require('./models');
+
 
 // SECTION - Middleware
 
