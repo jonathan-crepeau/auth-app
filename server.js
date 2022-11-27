@@ -29,6 +29,12 @@ app.use(express.urlencoded({extended: true}));
 // SECTION - HTML Routes
 app.use('/', routes.views.root);
 
+app.use('/profile', routes.views.profile);
+
+app.use('/login', routes.views.login);
+
+app.use('/signup', routes.views.signup);
+
 // Root (Home) Template
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, '/views/index.html'));
