@@ -22,7 +22,11 @@ const userSchema = new mongoose.Schema({
         unique: [true, 'Email Address Has Already Been Registered -- Please Try Again'],
         lowercase: true,
     },
-
+    password: {
+        type: String,
+        required: [true, 'Password Is Required'],
+        minLength: [4, 'Password Must Be At Lesat 4 Characters Long.'],
+    },
 }, {timestamps: true});
 
 const User = mongoose.model('User', userSchema);

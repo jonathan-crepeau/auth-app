@@ -1,6 +1,5 @@
 const express = require('express');
 const logger = require('./middleware/utils');
-const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3003;
 
@@ -15,9 +14,7 @@ const routes = require('./routes');
 
 
 // SECTION - Middleware
-
 app.use(express.static(`${__dirname}/public`))
-
 // Customer Logger Middleware
 app.use(logger);
 // NOTE - With Express 4.16+ (I'm 4.18+), you no longer have the download the body-parser package. Instead of 'app.use(bodyParser.json()', use the following TO PARSE JSON BODIES:
@@ -30,8 +27,8 @@ app.use(express.urlencoded({extended: true}));
 app.use('/', routes.views);
 
 
-
 // SECTION - API Routes
+app.use('/api/v1', routes.api);
 
 
 // SECTION - Start Server
