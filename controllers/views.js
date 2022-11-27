@@ -1,4 +1,4 @@
-const db = require('../models');
+const ROOT = `${__dirname}/..`;
 
 // Test
 const test = (req, res) => {
@@ -7,14 +7,39 @@ const test = (req, res) => {
     });
 };
 
-// Serve Root (Homepage)
+// ROOT
 const root = (req, res) => {
     res.sendFile('/views/index.html', {
-        root: `${__dirname}/../`
+        root: ROOT
     });
 };
 
+// PROFILE
+const profile = (req, res) => {
+    res.sendFile('/views/profile.html', {
+        root: ROOT
+    });
+};
+
+// SIGNUP
+const signup = (req, res) => {
+    res.sendFile('/views/signup.html', {
+        root: ROOT
+    });
+};
+
+// LOGIN
+const login = (req, res) => {
+    res.sendFile('/views/login.html', {
+        root: ROOT
+    });
+};
+
+
 module.exports = {
     test,
-    root
+    root,
+    profile,
+    signup,
+    login
 }

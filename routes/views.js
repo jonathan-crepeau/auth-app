@@ -1,38 +1,21 @@
-db = require('../models');
-const ROOT = `${__dirname}/..`;
+const express = require('express');
+const router = express.Router();
+const ctrl = require('../controllers');
 
-// Root (Homepage) Route
-const root = (req, res) => {
-    res.sendFile('/views/index.html', {
-        root: ROOT
-    });
-};
+// Test Route
+router.get('/test', ctrl.views.test);
+
+// Root Route
+router.get('/', ctrl.views.root);
 
 // Profile Route
-const profile = (req, res) => {
-    res.sendFile('/views/profile.html', {
-        root: ROOT
-    });
-};
+router.get('/profile', ctrl.views.profile);
 
 // Signup Route
-const signup = (req, res) => {
-    res.sendFile('/views/signup.html', {
-        root: ROOT
-    });
-};
+router.get('/signup', ctrl.views.signup);
 
 // Login Route
-const login = (req, res) => {
-    res.sendFile('/views/login.html', {
-        root: ROOT
-    });
-};
+router.get('/login', ctrl.views.login);
 
 
-module.exports = {
-    root,
-    profile,
-    signup,
-    login
-}
+module.exports = router;

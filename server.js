@@ -27,33 +27,8 @@ app.use(express.urlencoded({extended: true}));
 
 
 // SECTION - HTML Routes
-app.use('/', routes.views.root);
+app.use('/', routes.views);
 
-app.use('/profile', routes.views.profile);
-
-app.use('/login', routes.views.login);
-
-app.use('/signup', routes.views.signup);
-
-// Root (Home) Template
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '/views/index.html'));
-// });
-
-// GET Signup Template
-// app.get('/signup', (req, res) => {
-//     res.send(`<h1>Signup Route</h1>`);
-// });
-
-// GET Login Template
-// app.get('/login', (req, res) => {
-//     res.send(`<h1>Login Route</h1>`);
-// });
-
-//  GET Profile Template
-// app.get('/profile', (req, res) => {
-//     res.send(`<h1>Profile Route</h1>`);
-// });
 
 
 // SECTION - API Routes
