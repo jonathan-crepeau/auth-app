@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const logger = require('./middleware/utils');
 const app = express();
 const PORT = process.env.PORT || 3003;
@@ -10,9 +11,6 @@ const db = require('./models');
 const routes = require('./routes');
 
 
-// Require Routes
-
-
 // SECTION - Middleware
 app.use(express.static(`${__dirname}/public`))
 // Customer Logger Middleware
@@ -21,6 +19,16 @@ app.use(logger);
 app.use(express.json());
 // NOTE - Also, instead of 'app.use(bodyParser.urlencoded({extended:true})), use the following:
 app.use(express.urlencoded({extended: true}));
+
+
+// SECTION - User Session
+app.set('trust proxy', 1);
+app.use(session({
+    secret: '8dhkgjdf7ejh3o;89yf9kdjf8u3u297y1h19dj',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true }
+}));
 
 
 // SECTION - HTML Routes

@@ -41,6 +41,34 @@ const signup = (req, res) => {
     });
 };
 
+// (POST) Login - Create Session
+const createSession = (req, res) => {
+    if (!req.body.email || !req.body.password) {
+        return res.status(400).json({
+            status: 400,
+            errors: [{message: 'Please enter your email and password'}]
+        });
+    }
+
+    db.User.findOne({email: req.body.email}, (err, foundUser) => {
+        if (err) return res.status(500).json({
+            status: 500,
+            errors: [{message: "Something went wrong, please try agian."}]
+        });
+
+        if (!foundUser) {
+            return res.status(400).json({
+                status: 400,
+                errors: [{message: "No user found for this email, please try again."}]
+            });
+        }
+
+        // NOTE - HERE IS WHERE I LEFT OFF
+
+
+    })
+}
+
 
 module.exports = {
     signup
