@@ -63,13 +63,45 @@ const createSession = (req, res) => {
             });
         }
 
-        // NOTE - HERE IS WHERE I LEFT OFF
+        bcrypt.compare(req.body.password, foundUser.password, (err, isMatch) => {
+            if (err) return res.status(500).json({
+                status: 500,
+                errors: [{message: "Something went wrong, please try again."}]
+            });
+
+            if (isMatch) {
+                req.session.loggedIn = true;
+                req.session.currentUser = foundUser._id;
+                return res.status(200).json({
+                    status: 200,
+                    data: {id: foundUser._id}
+                });
+            } else {
+                return res.json({
+                    status: 400,
+                    errors: [{message: 'Username or password is incorrect'}]
+                });
+            }
+        });
+    });
+};
 
 
-    })
-}
+// VERIFY
+const verify = (req, res) => {
+    if (req.session.currentUser) {
+        return res.json({
+            message: "Authorized",
+            userId: req.session.currentUser
+        });
+    }
+
+    res.status(401).json({message: 'You are not authenticated'});
+};
 
 
 module.exports = {
-    signup
+    signup,
+    createSession,
+    verify
 };
