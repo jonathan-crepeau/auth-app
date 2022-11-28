@@ -13,7 +13,7 @@ const signup = (req, res) => {
         if (err) return res.status(400).json({message: "Bad request, please try again."});
 
         // NOTE - Return Error if Account Already Exists:
-        if (foundUser) return res.status(400).json({message: "Email has already been registered."});
+        if (foundUser) return res.status(400).json({message: "Email has already been registered, please try again."});
 
         // NOTE - Generate Hash Salt
         bcrypt.genSalt(10, (err, salt) => {
@@ -59,7 +59,7 @@ const createSession = (req, res) => {
         if (!foundUser) {
             return res.status(400).json({
                 status: 400,
-                errors: [{message: "No user found for this email, please try again."}]
+                errors: [{message: "Username or password is incorrect, please try again."}]
             });
         }
 
@@ -87,7 +87,7 @@ const createSession = (req, res) => {
 };
 
 
-// VERIFY
+// (GET) Verify User
 const verify = (req, res) => {
     if (req.session.currentUser) {
         return res.json({

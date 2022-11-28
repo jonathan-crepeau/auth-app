@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')
 const logger = require('./middleware/utils');
 const app = express();
 const PORT = process.env.PORT || 3003;
@@ -13,6 +14,7 @@ const routes = require('./routes');
 
 // SECTION - Middleware
 app.use(express.static(`${__dirname}/public`))
+
 // Customer Logger Middleware
 app.use(logger);
 // NOTE - With Express 4.16+ (I'm 4.18+), you no longer have the download the body-parser package. Instead of 'app.use(bodyParser.json()', use the following TO PARSE JSON BODIES:
@@ -24,6 +26,7 @@ app.use(express.urlencoded({extended: true}));
 // SECTION - User Session
 app.set('trust proxy', 1);
 app.use(session({
+    store: MongoStore.create({mongoUrl: "mongodb+srv://jonathan-crepeau:my-password@authocluster0.zfoiawz.mongodb.net/authappdb?retryWrites=true&w=majority"}),
     secret: '8dhkgjdf7ejh3o;89yf9kdjf8u3u297y1h19dj',
     resave: false,
     saveUninitialized: false,
