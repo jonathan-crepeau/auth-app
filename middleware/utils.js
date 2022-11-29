@@ -4,6 +4,7 @@ const logger = (req, res, next) => {
     const requestedAt = new Date().toLocaleString();
     const result = `${method} ${url} ${requestedAt}`;
     console.log(result);
+    // console.log(res);
     next();
 };
 
