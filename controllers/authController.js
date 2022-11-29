@@ -87,6 +87,19 @@ const createSession = (req, res) => {
 };
 
 
+// DELETE deleteSession Logout
+const deleteSession = (req, res) => {
+    if (!req.session.currentUser) {
+        return res.status(401).json({message: "Unauthorized, please login and try again."});
+    }
+
+    req.session.destroy((err) => {
+        if (err) return res.status(400).json(err);
+        res.sendStatus(200);
+    });
+}
+
+
 // (GET) Verify User
 const verify = (req, res) => {
     if (req.session.currentUser) {
@@ -103,5 +116,6 @@ const verify = (req, res) => {
 module.exports = {
     signup,
     createSession,
-    verify
+    verify,
+    deleteSession
 };
