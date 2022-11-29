@@ -1,30 +1,36 @@
 console.log('signup.js reporting for duty..');
 
-const signupForm = document.getElementById('signup-form');
+const form = document.getElementById('signup-form');
 
-const handleClick = (event) => {
-    let formIsValid = true;
-    const userData = {};
+const handleBtnClick = (event) => {
     event.preventDefault();
-    console.log('Submit Now button clicked!');
+    console.log('Signup button clicked!');
 
-    const formInputs = [...signupForm.elements];
-    formInputs.forEach((input) => {
-        userData[input.name] = input.value;
-        console.log('User Data Below:');
-        console.log(userData);
+    userFName = document.getElementById('first-name');
+    userLName = document.getElementById('last-name');
+    userEmail = document.getElementById('email');
+    userPassword = document.getElementById('password');
 
-        fetch('http://localhost:3003/api/v1/signup', {
-            method: "POST", 
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        })
-            .then((dataStream) => dataStream.json)
-            .then((dataObj) => console.log(dataObj))
-            .catch((error) => console.log(error));
-    });
-};
+    const newUser = {
+        firstName: userFName.value,
+        lastName: userLName.value,
+        email: userEmail.value,
+        password: userPassword.value
+    };
 
-signupForm.addEventListener('submit', handleClick);
+    console.log(newUser);
+
+    fetch('http://localhost:3003/api/v1/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.log(error));
+
+}
+
+form.addEventListener('submit', handleBtnClick);

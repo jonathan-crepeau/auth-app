@@ -24,13 +24,13 @@ app.use(express.urlencoded({extended: true}));
 
 
 // SECTION - User Session
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 app.use(session({
     store: MongoStore.create({mongoUrl: "mongodb+srv://jonathan-crepeau:my-password@authocluster0.zfoiawz.mongodb.net/authappdb?retryWrites=true&w=majority"}),
     secret: '8dhkgjdf7ejh3o;89yf9kdjf8u3u297y1h19dj',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: true }
+    // cookie: { secure: true }
 }));
 
 
